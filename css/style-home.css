@@ -79,12 +79,12 @@ body{
     font-family: 'lato', sans-serif;
     color: #d5be8b;
     padding: 5px;
-    font-size: 30px;
+    font-size: 150px;
     border-radius: 50%;
-    background: #cc5617;
+    background: black;
     position: absolute;
-    bottom: -5px;
-    left: -3px;
+    bottom: -12px;
+    left: -12px;
 }
 
 
@@ -261,6 +261,13 @@ body{
     height: 300px;
     top: 200px;
     left: 200px;
+}
+
+.collage-image:nth-child(3){
+    width: 370px;
+    height: 350px;
+    top: 100px;
+    left: 350px;
 }
 
 .collage-image:hover{
