@@ -188,6 +188,8 @@ body{
     height: 100%;
     position: absolute;
     z-index: -1;
+    top: 0;
+    left: 0;
 }
 
 .section-info{
