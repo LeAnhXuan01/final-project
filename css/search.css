@@ -23,7 +23,7 @@
     transform: translate(-50%, -50%);
     color:black;
     text-transform: capitalize;
-    font-size: 25px;
+    font-size: 24px;
     opacity: 0;
     transition: 0.5s;
 }
