@@ -372,3 +372,40 @@ footer{
     text-transform: capitalize;
     font-size: 20px;
 }
+
+.user-icon-popup{
+    position: absolute;
+    top: 200%;
+    padding: 20px;
+    background: #fff;
+    font-family: 'lato', sans-serif;
+    width: 180px;
+    right: 0;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #190c05;
+    display: none;
+}
+
+.user-icon-popup.active{
+    display: block;
+}
+
+.user-icon-popup p{
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    line-height: 2rem;
+}
+
+.user-icon-popup a{
+    display: block;
+    margin: 20px auto 0;
+    text-decoration: none;
+    color: #fff;
+    background: chartreuse;
+    padding: 10px;
+    width: 100px;
+    text-transform: capitalize;
+    border-radius: 5px;
+}
+
