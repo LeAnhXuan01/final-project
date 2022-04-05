@@ -1,7 +1,7 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, collection, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, collection, setDoc, getDoc, updateDoc, query, where} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -147,6 +147,45 @@ app.get('/dashboard',(req, res) => {
 // add product
 app.get('/add-product', (req, res) => {
     res.sendFile("add-product.html", { root : "public" });
+})
+
+app.get('/add-product/:id', (req, res) => {
+    res.sendFile("add-product.html", { root : "public" });
+})
+
+app.post('/get-products', (req, res) => {
+    let{ email } = req.body
+
+    let products = collection(db, "products");
+    let docRef;
+
+    docRef = getDoc(query(products, where("email", "==", email)))
+
+    docRef.then(products =>{
+        if(products.empty){
+            return res.json('no product');
+        }
+        let productArr = [];
+
+        products.forEach(item => {
+            let data = item.data();
+            data.id = item.id;
+            productArr.push(data);
+        })
+
+        res.json(productArr);
+    })
+})
+
+app.post('/delete-product', (req, res) => {
+    let { id } = req.body;
+    
+    deleteDoc(doc(collection(db, "products"), id))
+    .then(data => {
+        res.json('success');
+    }).catch(err =>{
+        res.json('err');
+    })
 })
 
 // 404 route

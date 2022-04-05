@@ -8,3 +8,32 @@ if(user == null){
 
 let greeting = document.querySelector('#seller-greeting');
 greeting.innerHTML += user.name;
+
+
+//loader
+let loader = document.querySelector('.loader');
+let noProductImg = document.querySelector('.no-product');
+
+loader.style.display = 'block';
+
+const setupProducts = () =>{
+    fetch('/get-products', {
+        method : 'post' ,
+        headers: new Headers({'Content-type': 'application/json'}),
+        body: JSON.stringify({email : user.email})
+    })
+    .then(res => res.json())
+    .then(data =>{
+        loader.style.display = 'none';
+        if(data == 'no-product'){
+            noProductImg.style.display = 'block';
+        }else{
+            data.array.forEach(product => createProduct(product));
+                
+        }
+    })
+}
+
+setupProducts();
+
+
