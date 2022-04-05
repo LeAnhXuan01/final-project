@@ -141,7 +141,7 @@ app.post('/seller',(req, res) => {
 
 //dashboard
 app.get('/dashboard',(req, res) => {
-    res.sendFile("seller.html", { root : "public"})
+    res.sendFile("dashboard.html", { root : "public"})
 })
 
 // 404 route
