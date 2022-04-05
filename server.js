@@ -115,7 +115,7 @@ app.post('/login', (req, res) => {
 
 //seller route
 app.get('/seller',(req, res) => {
-    res.sendFile("seller.html", { root : "public"})
+    res.sendFile("seller.html", { root : "public" })
 })
 
 app.post('/seller',(req, res) => {
@@ -139,9 +139,9 @@ app.post('/seller',(req, res) => {
     }
 })
 
-//dashboard
+// //dashboard
 app.get('/dashboard',(req, res) => {
-    res.sendFile("seller.html", { root : "public"})
+    res.sendFile("dashboard.html", { root : "public"})
 })
 
 // 404 route
