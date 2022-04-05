@@ -18,9 +18,10 @@
   },
   "homepage": "https://github.com/LeAnhXuan01/final-project#readme",
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "aws-sdk": "^2,1087.0",
+    "scrypt": "^5.0.1",
     "express.js": "^1.0.0",
-    "firebase": "^9.6.10",
+    "firebase": "^9.6.3",
     "nodemon": "^2.0.15"
   }
 }

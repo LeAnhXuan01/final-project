@@ -24,6 +24,46 @@ const app = express();
 app.use(express.static("public"));
 app.use(express.json()) // enables form sharing
 
+//aws
+import aws from "aws-sdk";
+import "dotenv/config";
+
+//aws setup
+const region = "ap-south-1";
+const bucketName = "ecom-website-4";
+const accessKeyId = process.env.AWS_ACCESS_KEY;
+const secretAccessKey = process.env.AWS_SECRET_KEY;
+
+aws.config.update({
+    region,
+    accessKeyId,
+    secretAccessKey
+})
+
+//init s3
+const s3 = new aws.S3();
+
+//generate image url
+async function generateURL(){
+    let date = new Date();
+
+    const imageName = `${date,getTime()}.jpeg`;
+
+    const params = {
+        Bucket: bucketName,
+        Key: imageName,
+        Expires: 300, //300 ms
+        ContentType: "image/jpeg"
+    }
+
+    const uploadURL = await s3.getSignedUrlPromise("putObject", params);
+    return uploadURL;
+}
+
+app.get('/s3url', (req, res) => {
+    generateURL.then(url => res.json(url));
+})
+
 // routes
 // home routes
 app.get('/', (req, res) => {
@@ -148,6 +188,36 @@ app.get('/dashboard',(req, res) => {
 app.get('/add-product', (req, res) => {
     res.sendFile("add-product.html", { root : "public" });
 })
+
+app.post('/add-product', (req, res) => {
+    let { name, shortDes, detail, price, image, tags, email, draft } = req.body;
+
+    if(!name.length){
+        res.json({'alert' : 'shold enter product name'});
+    } else if(!shortDes.length){
+        res.json({'alert' : 'short des must bo 80 letters long'});
+    } else if(!price.length || !Number(price)){
+        res.json({'alert' : 'enter valid price'});
+    } else if(!detail.length){
+        res.json({'alert' : 'must enter the detail'});
+    } else if(!tags.length){
+        res.json({'alert' : 'enter tag'});
+    }
+
+    //add-product
+
+    let docName = `${name.toLowerCase()}-${Math.random() *50000}`
+
+    let product = collection(db, "products");
+    setDoc(doc(product, docName), req.body)
+    .then(data => {
+        res.json({'product': name})
+    })
+    .catch(err => {
+        res.json({'alert': 'some error occured.'})
+    })
+})
+
 
 app.get('/add-product/:id', (req, res) => {
     res.sendFile("add-product.html", { root : "public" });

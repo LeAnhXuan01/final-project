@@ -47,6 +47,10 @@ body{
     border: 1px solid #ff3737;
 }
 
+.error.show{
+    opacity: 1;
+}
+
 .product-image{
     background: #fff;
     width: 100%;
