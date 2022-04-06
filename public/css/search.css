@@ -6,6 +6,8 @@
 }
 
 .product-container{
+    justify-content: flex-start;
+    gap: 20px;
     flex-wrap: wrap;
 }
 

@@ -190,23 +190,23 @@ app.get('/add-product', (req, res) => {
 })
 
 app.post('/add-product', (req, res) => {
-    let { name, shortDes, detail, price, image, tags, email, draft } = req.body;
-
-    if(!name.length){
-        res.json({'alert' : 'shold enter product name'});
-    } else if(!shortDes.length){
-        res.json({'alert' : 'short des must bo 80 letters long'});
-    } else if(!price.length || !Number(price)){
-        res.json({'alert' : 'enter valid price'});
-    } else if(!detail.length){
-        res.json({'alert' : 'must enter the detail'});
-    } else if(!tags.length){
-        res.json({'alert' : 'enter tag'});
+    let { name, shortDes, detail, price, image, tags, email, draft, id} = req.body;
+    if(!draft){
+        if(!name.length){
+            res.json({'alert' : 'shold enter product name'});
+        } else if(!shortDes.length){
+            res.json({'alert' : 'short des must bo 80 letters long'});
+        } else if(!price.length || !Number(price)){
+            res.json({'alert' : 'enter valid price'});
+        } else if(!detail.length){
+            res.json({'alert' : 'must enter the detail'});
+        } else if(!tags.length){
+            res.json({'alert' : 'enter tag'});
+        }
     }
 
     //add-product
-
-    let docName = `${name.toLowerCase()}-${Math.random() *50000}`
+    let docName = id == undefined ? `${name.toLowerCase()}-${Math.random() *50000}` :id;
 
     let product = collection(db, "products");
     setDoc(doc(product, docName), req.body)
@@ -224,18 +224,18 @@ app.get('/add-product/:id', (req, res) => {
 })
 
 app.post('/get-products', (req, res) => {
-    let{ email, id } = req.body
+    let{ email, id, tag } = req.body
 
     let products = collection(db, "products");
     let docRef;
 
     if(id){
         docRef = getDoc(doc(products, id));
+    }else if(tag){
+        docRef = getDoc(query(products,where("tags","array-contains", tag)))
     }else{
         docRef = getDoc(query(products, where("email","==",email)))
     }
-
-    docRef = getDoc(query(products, where("email", "==", email)))
 
     docRef.then(products =>{
         if(products.empty){
@@ -266,6 +266,14 @@ app.post('/delete-product', (req, res) => {
     }).catch(err =>{
         res.json('err');
     })
+})
+
+app.get('/product/:id', (req, res) => {
+    res.sendFile("product.html", {root : "public" })
+})
+
+app.get('/search/:key', (req, res) => {
+    res.sendFile("search.html", {root : "public" })
 })
 
 // 404 route

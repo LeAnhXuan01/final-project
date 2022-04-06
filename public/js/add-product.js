@@ -77,6 +77,9 @@ addProductBtn.addEventListener('click', () => {
         //submit form
         loader.style.disoaly = 'block';
         let data = ProductData();
+        if(productId){
+            data.id = productId;
+        }
         sendData('/add-product', data)
     }
 })
@@ -96,6 +99,23 @@ const ProductData = () => {
         draft: false,
     }
 }
+
+// draft btn
+    let draftBtn = document.querySelector('.draft-btn');
+
+    draftBtn.addEventListener('click', () => {
+        if(!productName.innerHTML.length || productName.innerHTML == productName.getAttribute('data-placeholder')){
+            showFormError('enter product name atleast');
+        }else{
+            let data = ProductData();
+            loader.style.display = 'block';
+            data.draft = true;
+            if(productId){
+                data.id = productId;
+            }
+            sendData('/add-product', data)
+        }
+    })
 
 // edit page
 const fetchProductData = () => {
