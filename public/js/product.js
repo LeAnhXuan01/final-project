@@ -20,12 +20,18 @@ let detail = document.querySelector('.des');
 let productImage = document.querySelector('.product-image')
 let title = document.querySelector('.title');
 
+let cartBtn = document.querySelector('.cart-btn');
+
 const setData = (data) => {
     productName.innerHTML = title.innerHTML = data.name;
     productImage.src = data.image;
     shortDes.innerHTML = data.shortDes;
     detail.innerHTML = data.detail;
     price.innerHTML = `${data.price}`;
+
+    cartBtn.addEventListener('click', () => {
+        cartBtn.innerHTML = add_product_to_cart(data);
+    })
 }
 
 const fetchProductData = () =>{

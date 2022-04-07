@@ -276,6 +276,10 @@ app.get('/search/:key', (req, res) => {
     res.sendFile("search.html", {root : "public" })
 })
 
+app.get('/cart', (req, res) => {
+    res.sendFile("cart.html", { root : "public" })
+})
+
 // 404 route
 app.get('/404', (req, res) => {
     res.sendFile("404.html", { root : "public" })

@@ -25,7 +25,7 @@ const createNavbar = () => {
                 <input type="text" class="search" placeholder="search">
                 <button class="search-btn"><img src="../public/img/search.png" alt=""></button>
             </div>
-            <div class="cart">
+            <div class="cart" onclick="location.href = '/cart">
                 <img src="img/cart.png" class="cart-icon" alt="">
                 <span class="cart-item-count">00</span>
             </div>
@@ -78,3 +78,22 @@ searchBtn.addEventListener('click', () => {
         location.href = `/search/${searchBox.value}`;
     }
 })
+
+// nav cart
+const updateNavCartCounter = () => {
+    let cartCounter = document.querySelector('.cart-item-count');
+
+    let cartItem = JSON.parse(localStorage.getItem('cart'));
+
+    if(cartItem == null){
+        cartCounter.innerHTML = '00';
+    }else{
+        if(cartItem.length > 9){
+            cartCounter.innerHTML = '9+';
+        }else if(cartItem.length <= 9){
+            cartCounter.innerHTML = `0${cartItem.length}`
+        }
+    }
+}
+
+updateNavCartCounter();

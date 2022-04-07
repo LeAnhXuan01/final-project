@@ -57,3 +57,26 @@ const createCards = data => {
     })
     return cards;
 }
+
+// cart funtion
+
+const add_product_to_cart = product => {
+    updateNavCartCounter();
+    let cart = JSON.parse(localStorage.getItem('cart'));
+
+    if(cart==null){
+        cart = []
+    }
+
+    product = {
+        item: 1,
+        name: product.name,
+        price: product.price,
+        shortDes: product.shortDes,
+        image: product.image
+    }
+
+    cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    return 'added';
+}
