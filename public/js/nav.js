@@ -15,22 +15,22 @@ const createNavbar = () => {
 
     navbar.innerHTML += `
         <ul class="links-container">
-            <li class="link-item"><a href="#" class="link active">home</a></li>
-            <li class="link-item"><a href="#" class="link">product</a></li>
+            <li class="link-item"><a href="../index.html" class="link active">home</a></li>
+            <li class="link-item"><a href="../product.html" class="link">product</a></li>
             <li class="link-item"><a href="#" class="link">about</a></li>
-            <li class="link-item"><a href="#" class="link">contact</a></li>
+            <li class="link-item"><a href="../add-product.html" class="link">contact</a></li>
         </ul>
         <div class="user-interactions">
             <div class="search-box">
                 <input type="text" class="search" placeholder="search">
-                <button class="search-btn"><img src="../public/img/search.png" alt=""></button>
+                <button class="search-btn"><img src="../img/search.png" alt=""></button>
             </div>
             <div class="cart" onclick="location.href = '/cart">
-                <img src="img/cart.png" class="cart-icon" alt="">
+                <img src="../img/cart.png" class="cart-icon" alt="">
                 <span class="cart-item-count">00</span>
             </div>
             <div class="user">
-                <img src="img/user.png" class="user-icon" alt="">
+                <img src="../img/user.png" class="user-icon" alt="">
                 <div class="user-icon-popup">
                     <p>login to your account</p>
                     <a>login</a>

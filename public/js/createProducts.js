@@ -1,4 +1,3 @@
-
 const createProduct = (data) => {
     let productContainer = document.querySelector('.product-container');
     productContainer.innerHTML += `
@@ -9,7 +8,7 @@ const createProduct = (data) => {
         <img src="${data.image}" class="product-img" alt="">
         <p class="product-name">${data.tags[0]}</p>               
     </div>
-    `;
+    `
 }
 
 const deleteItem = (id) =>{
