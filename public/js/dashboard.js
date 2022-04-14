@@ -16,14 +16,14 @@ let noProductImg = document.querySelector('.no-product');
 
 loader.style.display = 'block';
 
-const setupProducts = () =>{
+const setupProducts = () => {
     fetch('/get-products', {
-        method : 'post' ,
-        headers: new Headers({'Content-type': 'application/json'}),
+        method: 'post',
+        headers: new Headers({'Content-type':'application/json'}),
         body: JSON.stringify({email : user.email})
     })
     .then(res => res.json())
-    .then(data =>{
+    .then(data => {
         loader.style.display = 'none';
         if(data == 'no-product'){
             noProductImg.style.display = 'block';

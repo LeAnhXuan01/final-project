@@ -1,7 +1,7 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, collection, setDoc, getDoc, updateDoc, query, where} from "firebase/firestore";
+import { getFirestore, doc, collection, setDoc, getDoc, updateDoc, getDocs, query, where, deleteDoc} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -180,7 +180,7 @@ app.post('/seller',(req, res) => {
 })
 
 // dashboard
-app.get('/dashboard',(req, res) => {
+app.get('/dashboard', (req, res) => {
     res.sendFile("dashboard.html", { root : "public"})
 })
 
@@ -206,9 +206,9 @@ app.post('/add-product', (req, res) => {
     }
 
     //add-product
-    let docName = id == undefined ? `${name.toLowerCase()}-${Math.random() *50000}` :id;
+    let docName = id == undefined ? `${name.toLowerCase()}-${Math.floor(Math.random() *50000)}` :id;
 
-    let product = collection(db, "products");
+    let products = collection(db, "products");
     setDoc(doc(product, docName), req.body)
     .then(data => {
         res.json({'product': name})
@@ -216,11 +216,6 @@ app.post('/add-product', (req, res) => {
     .catch(err => {
         res.json({'alert': 'some error occured.'})
     })
-})
-
-
-app.get('/add-product/:id', (req, res) => {
-    res.sendFile("add-product.html", { root : "public" });
 })
 
 app.post('/get-products', (req, res) => {
@@ -232,12 +227,12 @@ app.post('/get-products', (req, res) => {
     if(id){
         docRef = getDoc(doc(products, id));
     }else if(tag){
-        docRef = getDoc(query(products,where("tags","array-contains", tag)))
+        docRef = getDocs(query(products,where("tags","array-contains", tag)))
     }else{
-        docRef = getDoc(query(products, where("email","==",email)))
+        docRef = getDocs(query(products, where("email","==",email)))
     }
 
-    docRef.then(products =>{
+    docRef.then(products => {
         if(products.empty){
             return res.json('no product');
         }
