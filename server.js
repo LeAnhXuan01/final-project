@@ -24,46 +24,6 @@ const app = express();
 app.use(express.static("public"));
 app.use(express.json()) // enables form sharing
 
-//aws
-import aws from "aws-sdk";
-import "dotenv/config";
-
-//aws setup
-const region = "ap-south-1";
-const bucketName = "ecom-website-4";
-const accessKeyId = process.env.AWS_ACCESS_KEY;
-const secretAccessKey = process.env.AWS_SECRET_KEY;
-
-aws.config.update({
-    region,
-    accessKeyId,
-    secretAccessKey
-})
-
-//init s3
-const s3 = new aws.S3();
-
-//generate image url
-async function generateURL(){
-    let date = new Date();
-
-    const imageName = `${date,getTime()}.jpeg`;
-
-    const params = {
-        Bucket: bucketName,
-        Key: imageName,
-        Expires: 300, //300 ms
-        ContentType: "image/jpeg"
-    }
-
-    const uploadURL = await s3.getSignedUrlPromise("putObject", params);
-    return uploadURL;
-}
-
-app.get('/s3url', (req, res) => {
-    generateURL.then(url => res.json(url));
-})
-
 // routes
 // home routes
 app.get('/', (req, res) => {
@@ -265,6 +225,22 @@ app.post('/delete-product', (req, res) => {
 
 app.get('/product', (req, res) => {
     res.sendFile("product.html", {root : "public" })
+})
+
+app.get('/product-1', (req, res) => {
+    res.sendFile("product-1.html", {root : "public" })
+})
+
+app.get('/product-2', (req, res) => {
+    res.sendFile("product-2.html", {root : "public" })
+})
+
+app.get('/product-3', (req, res) => {
+    res.sendFile("product-3.html", {root : "public" })
+})
+
+app.get('/product-4', (req, res) => {
+    res.sendFile("product-4.html", {root : "public" })
 })
 
 app.get('/search', (req, res) => {

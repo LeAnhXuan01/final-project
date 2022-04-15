@@ -30,7 +30,7 @@ body{
     list-style: none;
 }
 
-.link-item{
+.link-item {
     margin: 10px;
 }
 
@@ -165,6 +165,7 @@ body{
 .section-title{
     text-transform: capitalize;
     font-size: 30px;
+    margin-top: 30px;
     margin-bottom: 30px;
     display: flex;
     justify-content: center;
@@ -325,70 +326,6 @@ body{
     transform: translateY(-10px);
 }
 
-/* review section */
-
-.review-section{
-    padding: 50px 5vw;
-}
-
-.review-container{
-    margin: 50px;
-    margin-bottom: 0;
-    display: flex;
-    justify-content: space-between;
-}
-
-.review-card{
-    width: 300px;
-    height: auto;
-    font-family: 'lato', sans-serif;
-}
-
-.user-dp{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    position: relative;
-}
-
-.user-dp img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.user-dp::before{
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    border: 4px solid #fff;
-    border-radius: 50%;
-}
-
-.user-dp::after{
-    content: attr(data-rating);
-    position: absolute;
-    bottom: 0;
-    right: -20px;
-    padding: 5px 10px;
-    border-radius: 20px;
-    background: chartreuse;
-}
-
-.review-title{
-    font-size: 20px;
-    line-height: 25px;
-    margin: 30px 0;
-    text-transform: capitalize;
-}
-
-.review{
-    opacity: 0.7;
-}
-
 .end-section{
     padding: 50px 5vw;
 }
@@ -418,6 +355,7 @@ footer{
     text-align: center;
     text-transform: capitalize;
     font-size: 20px;
+    margin-bottom: 0;
 }
 
 .user-icon-popup{

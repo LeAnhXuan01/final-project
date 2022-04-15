@@ -83,12 +83,12 @@ body{
     pointer-events: all;
 }
 
-.open-btn{
+/* .open-btn{
     top: 60px;
-}
+} */
 
 .delete-btn{
-    top: 110px;
+    top: 55px;
 }
 
 .btn img{
